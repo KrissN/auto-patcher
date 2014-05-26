@@ -1,0 +1,39 @@
+diff -Npruw stock-framework/smali/android/app/ContextImpl$11.smali pdroid-framework/smali/android/app/ContextImpl$11.smali
+--- stock-framework/smali/android/app/ContextImpl$11.smali	2014-05-26 08:28:42.846339480 +0200
++++ pdroid-framework/smali/android/app/ContextImpl$11.smali	2014-05-26 08:28:48.606343206 +0200
+@@ -29,23 +29,29 @@
+     .registers 6
+     .param p1    # Landroid/app/ContextImpl;
+ 
+-    const-string v1, "connectivity"
++    const-string v2, "connectivity"
+ 
+-    invoke-static {v1}, Landroid/os/ServiceManager;->getService(Ljava/lang/String;)Landroid/os/IBinder;
++    invoke-static {v2}, Landroid/os/ServiceManager;->getService(Ljava/lang/String;)Landroid/os/IBinder;
+ 
+     move-result-object v0
+ 
+-    new-instance v1, Landroid/net/ConnectivityManager;
++    const-string v2, "ContextImpl"
++
++    const-string v3, "PDroid:ContextImpl: returning PrivacyConnectivityManager"
++
++    invoke-static {v2, v3}, Landroid/util/Log;->d(Ljava/lang/String;Ljava/lang/String;)I
+ 
+     invoke-static {v0}, Landroid/net/IConnectivityManager$Stub;->asInterface(Landroid/os/IBinder;)Landroid/net/IConnectivityManager;
+ 
+-    move-result-object v2
++    move-result-object v1
++
++    new-instance v2, Landroid/privacy/surrogate/PrivacyConnectivityManager;
+ 
+     invoke-virtual {p1}, Landroid/app/ContextImpl;->getPackageName()Ljava/lang/String;
+ 
+     move-result-object v3
+ 
+-    invoke-direct {v1, v2, v3}, Landroid/net/ConnectivityManager;-><init>(Landroid/net/IConnectivityManager;Ljava/lang/String;)V
++    invoke-direct {v2, v1, p1, v3}, Landroid/privacy/surrogate/PrivacyConnectivityManager;-><init>(Landroid/net/IConnectivityManager;Landroid/content/Context;Ljava/lang/String;)V
+ 
+-    return-object v1
++    return-object v2
+ .end method

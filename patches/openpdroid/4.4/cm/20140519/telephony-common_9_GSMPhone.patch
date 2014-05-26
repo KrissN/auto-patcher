@@ -1,0 +1,21 @@
+diff -Npruw stock-telephony/smali/com/android/internal/telephony/gsm/GSMPhone.smali pdroid-telephony/smali/com/android/internal/telephony/gsm/GSMPhone.smali
+--- stock-telephony/smali/com/android/internal/telephony/gsm/GSMPhone.smali	2014-05-19 12:43:48.419117129 +0200
++++ pdroid-telephony/smali/com/android/internal/telephony/gsm/GSMPhone.smali	2014-05-19 12:43:53.672096818 +0200
+@@ -3987,7 +3987,7 @@
+     return-void
+ .end method
+ 
+-.method notifyLocationChanged()V
++.method public notifyLocationChanged()V
+     .registers 2
+ 
+     iget-object v0, p0, Lcom/android/internal/telephony/gsm/GSMPhone;->mNotifier:Lcom/android/internal/telephony/PhoneNotifier;
+@@ -4006,7 +4006,7 @@
+     return-void
+ .end method
+ 
+-.method notifyPhoneStateChanged()V
++.method public notifyPhoneStateChanged()V
+     .registers 2
+ 
+     iget-object v0, p0, Lcom/android/internal/telephony/gsm/GSMPhone;->mNotifier:Lcom/android/internal/telephony/PhoneNotifier;

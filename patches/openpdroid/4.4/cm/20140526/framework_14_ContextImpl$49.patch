@@ -1,0 +1,35 @@
+diff -Npruw stock-framework/smali/android/app/ContextImpl$49.smali pdroid-framework/smali/android/app/ContextImpl$49.smali
+--- stock-framework/smali/android/app/ContextImpl$49.smali	2014-05-26 08:28:42.853339485 +0200
++++ pdroid-framework/smali/android/app/ContextImpl$49.smali	2014-05-26 08:28:48.618343214 +0200
+@@ -26,26 +26,22 @@
+ 
+ # virtual methods
+ .method public createService(Landroid/app/ContextImpl;)Ljava/lang/Object;
+-    .registers 6
++    .registers 5
+     .param p1    # Landroid/app/ContextImpl;
+ 
+-    const-string/jumbo v2, "themes"
++    const-string v2, "battery"
+ 
+     invoke-static {v2}, Landroid/os/ServiceManager;->getService(Ljava/lang/String;)Landroid/os/IBinder;
+ 
+     move-result-object v0
+ 
+-    invoke-static {v0}, Landroid/content/res/IThemeService$Stub;->asInterface(Landroid/os/IBinder;)Landroid/content/res/IThemeService;
++    invoke-static {v0}, Landroid/app/IBatteryService$Stub;->asInterface(Landroid/os/IBinder;)Landroid/app/IBatteryService;
+ 
+     move-result-object v1
+ 
+-    new-instance v2, Landroid/content/res/ThemeManager;
++    new-instance v2, Landroid/os/BatteryManager;
+ 
+-    invoke-virtual {p1}, Landroid/app/ContextImpl;->getOuterContext()Landroid/content/Context;
+-
+-    move-result-object v3
+-
+-    invoke-direct {v2, v3, v1}, Landroid/content/res/ThemeManager;-><init>(Landroid/content/Context;Landroid/content/res/IThemeService;)V
++    invoke-direct {v2, v1, p1}, Landroid/os/BatteryManager;-><init>(Landroid/app/IBatteryService;Landroid/content/Context;)V
+ 
+     return-object v2
+ .end method
